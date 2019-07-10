@@ -1,9 +1,9 @@
 import React from "react";
-import Passenger from "./passenger/Passenger";
+import PassengerForm from "./passenger/PassengerForm";
 
 function App() {
   return (
-    <Passenger/>
+    <PassengerForm/>
   );
 }
 
