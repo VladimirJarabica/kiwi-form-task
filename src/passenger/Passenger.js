@@ -3,6 +3,7 @@ import Stack from "@kiwicom/orbit-components/lib/Stack";
 import InputField from "@kiwicom/orbit-components/lib/InputField";
 import InputGroup from "@kiwicom/orbit-components/lib/InputGroup";
 import Select from "@kiwicom/orbit-components/lib/Select";
+import { GENDERS, MONTHS } from "./constants";
 
 function Passenger() {
   return (
@@ -11,7 +12,11 @@ function Passenger() {
       <InputField label="Last name" size="small" />
       <InputField label="Nationality" size="small" />
       <InputGroup label="Gender">
-        <Select options={[{value: null, label:'Choose one'},{ value: "male", label: "Male" }, { value: "female", label: "Female" }, { value: "other", label: "Other" }]} value={null}/>
+        <Select
+          options={GENDERS}
+          value={null}
+          placeholder="Choose one"
+        />
       </InputGroup>
       <InputGroup
         label="Date of birth"
@@ -19,11 +24,7 @@ function Passenger() {
       >
         <InputField placeholder="DD" />
         <Select
-          options={[
-            { value: "january", label: "January" },
-            { value: "february", label: "February" },
-            { value: "march", label: "March" }
-          ]}
+          options={MONTHS}
           value={null}
           placeholder="Month"
         />
