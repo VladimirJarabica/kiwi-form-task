@@ -13,14 +13,37 @@ const Container = styled.div`
 `;
 
 class PassengerForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      passengers: [{}],
+    }
+  }
+
+  createPassengers = () => {
+    let passengers = [];
+    for (let i = 0; i < this.state.passengers.length; i++) {
+      passengers.push(<Passenger key={i} />)
+    }
+    return passengers;
+  }
+
+  canAddPassanger = () => {
+    return this.state.passengers.length >= 9;
+  }
+
+  addPassenger = () => {
+    this.setState({passengers: this.state.passengers.concat({})});
+  }
+
   render() {
     return (
       <Container>
-        <Header />
+        <Header />-
         <Stack direction="column">
-          <Passenger />
+          {this.createPassengers()}
         </Stack>
-        <Footer />
+        <button onClick={this.addPassenger} disabled={this.canAddPassanger()}>Add new passenger</button>
         <Illustration size="medium" name="Improve" />
       </Container>
     );
