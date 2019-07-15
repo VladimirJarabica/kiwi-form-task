@@ -16,14 +16,14 @@ class PassengerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      passengers: [{}],
+      passengers: [{ isValid: false }],
     }
   }
 
   createPassengers = () => {
     let passengers = [];
     for (let i = 0; i < this.state.passengers.length; i++) {
-      passengers.push(<Passenger key={i} />)
+      passengers.push(<Passenger key={i} validated={(errors) => this.passengerValidated(i, errors)} />)
     }
     return passengers;
   }
@@ -33,7 +33,20 @@ class PassengerForm extends React.Component {
   }
 
   addPassenger = () => {
-    this.setState({passengers: this.state.passengers.concat({})});
+    this.setState({ passengers: this.state.passengers.concat({ isValid: false }) });
+  }
+
+  passengerValidated = (id, errors) => {
+    let allValid = true;
+    for (let key in errors) {
+      if (errors.hasOwnProperty(key) && errors[key]) {
+        allValid = false;
+        break;
+      }
+    }
+    let newPassangers = this.state.passengers.slice();
+    newPassangers[id].isValid = allValid;
+    this.setState({ passengers: newPassangers });
   }
 
   render() {
@@ -44,6 +57,7 @@ class PassengerForm extends React.Component {
           {this.createPassengers()}
         </Stack>
         <button onClick={this.addPassenger} disabled={this.canAddPassanger()}>Add new passenger</button>
+        <Footer/>
         <Illustration size="medium" name="Improve" />
       </Container>
     );
